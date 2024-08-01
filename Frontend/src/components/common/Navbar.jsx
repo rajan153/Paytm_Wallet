@@ -1,12 +1,17 @@
-import React from 'react'
+import React from "react";
 
 function Navbar() {
   return (
-    <div className='flex justify-between p-5 bg-gray-200'>
-    <h1 className='font-bold'>Payment Apps</h1>
-    <p className='font-light'>Hello, User</p>
+    <div className="shadow h-14 flex justify-between">
+      <div className="flex flex-col justify-center h-full ml-4">PayTM App</div>
+      <div className="flex">
+        <div className="flex flex-col justify-center h-full mr-4">Hello</div>
+        <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center mt-1 mr-2">
+          <div className="flex flex-col justify-center h-full text-xl">U</div>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;
