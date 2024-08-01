@@ -3,10 +3,7 @@ const mongoose = require("mongoose");
 
 exports.addMoney = async (req, res) => {
   try {
-    const userId = req.userId;
     const { money } = req.body;
-
-    console.log("USERID: ", userId);
 
     if (!money) {
       return res.status(411).json({
@@ -14,13 +11,14 @@ exports.addMoney = async (req, res) => {
       });
     }
 
-    const response = await Account.findByIdAndUpdate(
-      { userId },
+    const response = await Account.findOneAndUpdate(
+      { userId: req.userId },
       {
         $inc: {
           balance: +money,
         },
-      }
+      },
+      { new: true }
     );
 
     if (!response) {
@@ -43,7 +41,7 @@ exports.checkBalance = async (req, res) => {
   try {
     const userId = req.userId;
 
-    const response = await Account.findById({ userId });
+    const response = await Account.findOne({ userId });
 
     if (!response) {
       return res.status(400).json({
