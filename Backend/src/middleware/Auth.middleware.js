@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const authMiddleware = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
-  if (!authHeader) {
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(403).json({
       message: "User is not login",
     });
