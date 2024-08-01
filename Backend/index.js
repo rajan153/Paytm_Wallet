@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const MongoDb = require("./src/config/Database");
 const userRoute = require("./src/routes/User.routes");
+const accountRoute = require("./src/routes/Account.routes");
 const cors = require("cors");
 
 app.use(
@@ -20,3 +21,4 @@ MongoDb.then(() =>
 });
 
 app.use("/api/v1/users", userRoute);
+app.use("/api/v1/accounts", accountRoute);
