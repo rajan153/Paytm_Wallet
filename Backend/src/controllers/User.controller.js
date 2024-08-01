@@ -2,6 +2,7 @@ const User = require("../models/User.model");
 const { z } = require("zod");
 const { JWT_SECRET } = require("../config/Jsonwebtoken");
 const jwt = require("jsonwebtoken");
+const Account = require("../models/Account.model");
 
 const signUpValidation = z.object({
   username: z.string().email(),
@@ -34,11 +35,18 @@ exports.Signup = async (req, res) => {
     });
   }
 
-  await User.create({
+  const user = await User.create({
     username: req.body.username,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     password: req.body.password,
+  });
+
+  const userId = user._id;
+
+  await Account.create({
+    userId,
+    balance: 0,
   });
 
   res.status(200).json({
