@@ -93,3 +93,11 @@ exports.login = async (req, res) => {
     token,
   });
 };
+
+exports.getUsers = async (req, res) => {
+  const response = await User.find({ _id: { $ne: req.userId } });
+  return res.status(200).json({
+    response,
+    messgae: "You got all users",
+  });
+};
